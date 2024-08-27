@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, {  useState } from 'react'
 import SuggestionList from './SuggestionList'
 import debounce from 'lodash/debounce'
 
@@ -22,7 +22,12 @@ const fetchSuggestions = async(query)=>{
         debounceSearch(e.target.value)
     }
 
-    const debounceSearch = useCallback(debounce(fetchSuggestions,500),[fetchSuggestions])
+    const debounceSearch = 
+        debounce((query) => {
+          fetchSuggestions(query);
+        }, 500)
+    
+    
     const handleSelectSuggestion = (suggestionName) => {
         setInputValue(suggestionName);
         setSuggestions([]);
